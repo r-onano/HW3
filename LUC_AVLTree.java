@@ -1,7 +1,10 @@
 
 /*
  * *** CEPHER ONANO / COMP 400 C 002 ***
- *
+ * Last updated 2/19/25
+ * The code in this project is 99% provided by the professor. My addition is the 
+ * completion of the deleteElement method, which is derived from working backwards on 
+ * the insertElement code. 
  * This java file is a Java object implementing simple AVL Tree.
  * You are to complete the deleteElement method.
  *

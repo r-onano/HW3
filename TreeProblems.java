@@ -47,8 +47,13 @@ public class TreeProblems {
   public static void removeEven(Map<Integer, String> treeMap) {
 
     // INSERT CODE HERE.
-
-    return;
+    Iterator<Integer> iterator = treeMap.keySet().iterator();
+    while (iterator.hasNext()) {
+      if (iterator.next() % 2 == 0) {
+        iterator.remove();
+      }
+    }
+    // return;
   }
 
   /**
@@ -62,8 +67,8 @@ public class TreeProblems {
   public boolean treesEqual(Map<Integer, String> tree1, Map<Integer, String> tree2) {
 
     // INSERT CODE HERE
-
-    return false;
+    return tree1.equals(tree2);
+    // return false;
 
   }
 
