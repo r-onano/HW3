@@ -385,8 +385,44 @@ class LUC_AVLTree {
          * code for each. You can also look at the method InsertElement, as it has do
          * do many of the same things as this method.
          */
+        if (node != null) {
+            // Performing the normal scenario/standard delete.
+            if (value < node.value) {
+                node.leftChild = deleteElement(value, node.leftChild);
+            } else if (value > node.value) {
+                node.rightChild = deleteElement(value, node.rightChild);
+            } else {
+                // Node with only one child or no child
+                if (node.leftChild == null || node.rightChild == null) {
+                    node = (node.leftChild != null) ? node.leftChild : node.rightChild;
+                } else {
+                    /*
+                     * Node with two children: Get the inorder successor which is the smallest
+                     * in the right subtree.
+                     */
+                    Node temp = minValueNode(node.rightChild);
+                    node.value = temp.value;
+                    node.rightChild = deleteElement(temp.value, node.rightChild);
+                }
+            }
 
+            // Update height of the current node.
+            if (node != null) {
+                node.height = getMaxHeight(getHeight(node.leftChild), getHeight(node.rightChild)) + 1;
+
+                // Check the tree balance factor
+                int balance = getBalanceFactor(node);
+
+                // If this node becomes unblanced, rotate.
+                if (balance > 1) {
+                    node = (getBalanceFactor(node.leftChild) >= 0) ? LLRotation(node) : LRRotation(node);
+                } else if (balance < -1) {
+                    node = (getBalanceFactor(node.rightChild) <= 0) ? RRRotation(node) : RLRotation(node);
+                }
+            }
+        }
         return node;
+
     }
 
     /**
